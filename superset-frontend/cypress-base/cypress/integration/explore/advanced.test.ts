@@ -35,9 +35,13 @@ describe('Advanced analytics', () => {
       .find('input[type=text]')
       .type('28 days{enter}');
 
+    cy.get('[data-test=time_compare]').find('.Select__control').click();
     cy.get('[data-test=time_compare]')
       .find('input[type=text]')
-      .type('1 year{enter}');
+      .type('364 days{enter}');
+    cy.get('[data-test=time_compare]')
+      .find('.Select__multi-value__label')
+      .contains('364 days');
 
     cy.get('button[data-test="run-query-button"]').click();
     cy.wait('@postJson');
@@ -47,13 +51,10 @@ describe('Advanced analytics', () => {
       chartSelector: 'svg',
     });
 
-    cy.get('.panel-title').contains('Advanced Analytics').click();
-    cy.get('[data-test=time_compare]')
-      .find('.Select__multi-value__label')
-      .contains('28 days');
-    cy.get('[data-test=time_compare]')
-      .find('.Select__multi-value__label')
-      .contains('1 year');
+    cy.get('[data-test=time_compare]').within(() => {
+      cy.get('.Select__multi-value__label').contains('364 days');
+      cy.get('.Select__multi-value__label').contains('28 days');
+    });
   });
 });
 

@@ -26,6 +26,7 @@ const propTypes = {
     label: PropTypes.string,
     hasCustomLabel: PropTypes.bool,
   }),
+  defaultLabel: PropTypes.string,
   onChange: PropTypes.func.isRequired,
 };
 
@@ -61,6 +62,7 @@ export default class AdhocMetricEditPopoverTitle extends React.Component {
 
   onInputBlur(e) {
     if (e.target.value === '') {
+      e.target.value = this.props.defaultLabel;
       this.props.onChange(e);
     }
     this.onBlur();

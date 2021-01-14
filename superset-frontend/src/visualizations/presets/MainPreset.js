@@ -60,9 +60,10 @@ import {
   EchartsTimeseriesChartPlugin,
 } from '@superset-ui/plugin-chart-echarts';
 import {
-  AntdSelectFilterPlugin,
   AntdRangeFilterPlugin,
-} from 'src/filters/components/';
+  AntdSelectFilterPlugin,
+} from '@superset-ui/plugin-filter-antd';
+
 import FilterBoxChartPlugin from '../FilterBox/FilterBoxChartPlugin';
 import TimeTableChartPlugin from '../TimeTable/TimeTableChartPlugin';
 

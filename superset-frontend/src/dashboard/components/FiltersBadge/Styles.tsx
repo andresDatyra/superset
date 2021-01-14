@@ -91,8 +91,7 @@ export const Title = styled.span<TitleProps>`
   position: relative;
   margin-right: ${({ theme }) => theme.gridUnit}px;
   font-weight: ${({ bold, theme }) => {
-    if (bold) return theme.typography.weights.bold;
-    return 'auto';
+    return bold ? theme.typography.weights.bold : 'auto';
   }};
   color: ${({ color, theme }) => color || theme.colors.grayscale.light5};
 `;

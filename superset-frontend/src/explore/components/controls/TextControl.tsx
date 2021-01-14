@@ -107,7 +107,7 @@ export default class TextControl extends React.Component<
     return (
       <div>
         <ControlHeader {...this.props} />
-        <FormGroup controlId={this.state.controlId} bsSize="medium">
+        <FormGroup controlId={this.state.controlId} bsSize="small">
           <FormControl
             type="text"
             data-test="inline-name"

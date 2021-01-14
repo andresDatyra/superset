@@ -536,12 +536,13 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
     );
   };
 
-  const handleBulkDatasetExport = (datasetsToExport: Dataset[]) =>
-    window.location.assign(
+  const handleBulkDatasetExport = (datasetsToExport: Dataset[]) => {
+    return window.location.assign(
       `/api/v1/dataset/export/?q=${rison.encode(
         datasetsToExport.map(({ id }) => id),
       )}`,
     );
+  };
 
   return (
     <>

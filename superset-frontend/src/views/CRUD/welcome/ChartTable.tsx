@@ -100,8 +100,8 @@ function ChartTable({
     return filters;
   };
 
-  const getData = (filter: string) =>
-    fetchData({
+  const getData = (filter: string) => {
+    return fetchData({
       pageIndex: 0,
       pageSize: PAGE_SIZE,
       sortBy: [
@@ -112,6 +112,7 @@ function ChartTable({
       ],
       filters: getFilters(filter),
     });
+  };
 
   return (
     <ErrorBoundary>
@@ -150,7 +151,7 @@ function ChartTable({
             ),
             buttonStyle: 'tertiary',
             onClick: () => {
-              window.location.assign('/chart/add');
+              history.push('/chart/add');
             },
           },
           {

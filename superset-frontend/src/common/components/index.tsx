@@ -44,7 +44,6 @@ export {
   Typography,
   Tree,
   Popover,
-  Slider,
   Radio,
   Row,
   Select,

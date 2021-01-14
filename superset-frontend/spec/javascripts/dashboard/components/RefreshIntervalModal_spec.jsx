@@ -17,7 +17,7 @@
  * under the License.
  */
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 
 import ModalTrigger from 'src/components/ModalTrigger';
 import RefreshIntervalModal from 'src/dashboard/components/RefreshIntervalModal';
@@ -66,15 +66,11 @@ describe('RefreshIntervalModal', () => {
       refreshWarning: 'Show warning',
     };
 
-    const wrapper = getMountWrapper(props);
-    wrapper.find('span[role="button"]').simulate('click');
-
+    const wrapper = shallow(<RefreshIntervalModal {...props} />);
     wrapper.instance().handleFrequencyChange({ value: 30 });
-    wrapper.update();
-    expect(wrapper.find(ModalTrigger).find(Alert)).toExist();
+    expect(wrapper.find(ModalTrigger).dive().find(Alert)).toExist();
 
     wrapper.instance().handleFrequencyChange({ value: 3601 });
-    wrapper.update();
-    expect(wrapper.find(ModalTrigger).find(Alert)).not.toExist();
+    expect(wrapper.find(ModalTrigger).dive().find(Alert)).not.toExist();
   });
 });

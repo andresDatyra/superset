@@ -73,10 +73,11 @@ export function ColumnSelect({
     return cachedSupersetGet({
       endpoint: `/api/v1/dataset/${datasetId}`,
     }).then(
-      ({ json: { result } }) =>
-        result.columns
+      ({ json: { result } }) => {
+        return result.columns
           .map((col: any) => col.column_name)
-          .sort((a: string, b: string) => a.localeCompare(b)),
+          .sort((a: string, b: string) => a.localeCompare(b));
+      },
       async badResponse => {
         const { error, message } = await getClientErrorObject(badResponse);
         let errorText = message || error || t('An error has occurred');

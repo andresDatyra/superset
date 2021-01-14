@@ -125,7 +125,9 @@ export default function WindowedMenuList<OptionType extends OptionTypeBase>({
     data,
     index,
     style,
-  }) => <div style={style}>{data[index]}</div>;
+  }) => {
+    return <div style={style}>{data[index]}</div>;
+  };
 
   useEffect(() => {
     const lastSelected = getLastSelected(children);

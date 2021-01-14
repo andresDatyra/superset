@@ -44,12 +44,6 @@ export const CopyButton = styled(Button)`
   }
 `;
 
-const CopyNode = (
-  <CopyButton buttonSize="xs">
-    <i className="fa fa-clipboard" />
-  </CopyButton>
-);
-
 export const CopyToClipboardButton = ({
   data,
 }: {
@@ -58,7 +52,11 @@ export const CopyToClipboardButton = ({
   <CopyToClipboard
     text={data ? prepareCopyToClipboardTabularData(data) : ''}
     wrapped={false}
-    copyNode={CopyNode}
+    copyNode={
+      <CopyButton buttonSize="xs">
+        <i className="fa fa-clipboard" />
+      </CopyButton>
+    }
   />
 );
 
@@ -80,18 +78,8 @@ export const FilterInput = ({
   );
 };
 
-export const RowCount = ({
-  data,
-  loading,
-}: {
-  data?: Record<string, any>[];
-  loading: boolean;
-}) => (
-  <RowCountLabel
-    rowcount={data?.length ?? 0}
-    loading={loading}
-    suffix={t('rows retrieved')}
-  />
+export const RowCount = ({ data }: { data?: Record<string, any>[] }) => (
+  <RowCountLabel rowcount={data?.length ?? 0} suffix={t('rows retrieved')} />
 );
 
 export const useFilteredTableData = (

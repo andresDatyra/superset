@@ -60,9 +60,6 @@ const Label = styled.div`
   svg {
     margin-right: ${({ theme }) => theme.gridUnit}px;
   }
-  .option-label {
-    display: inline;
-  }
 `;
 
 const CaretContainer = styled.div`
@@ -87,7 +84,7 @@ export const HeaderContainer = styled.div`
 export const LabelsContainer = styled.div`
   padding: ${({ theme }) => theme.gridUnit}px;
   border: solid 1px ${({ theme }) => theme.colors.grayscale.light2};
-  border-radius: ${({ theme }) => theme.gridUnit}px;
+  border-radius: 3px;
 `;
 
 export const AddControlLabel = styled.div`
@@ -99,7 +96,7 @@ export const AddControlLabel = styled.div`
   font-size: ${({ theme }) => theme.typography.sizes.s}px;
   color: ${({ theme }) => theme.colors.grayscale.light1};
   border: dashed 1px ${({ theme }) => theme.colors.grayscale.light2};
-  border-radius: ${({ theme }) => theme.gridUnit}px;
+  border-radius: 3px;
   cursor: pointer;
 
   :hover {

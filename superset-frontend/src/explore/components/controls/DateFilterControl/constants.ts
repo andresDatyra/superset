@@ -32,7 +32,7 @@ export const FRAME_OPTIONS: SelectOptionType[] = [
   { value: 'Calendar', label: t('Previous') },
   { value: 'Custom', label: t('Custom') },
   { value: 'Advanced', label: t('Advanced') },
-  { value: 'No filter', label: t('No filter') },
+  { value: 'No Filter', label: t('No Filter') },
 ];
 
 export const COMMON_RANGE_OPTIONS: SelectOptionType[] = [

@@ -112,7 +112,7 @@ describe('SelectControl', () => {
               placeholder="add something"
             />,
           );
-          expect(withMulti.html()).not.toContain('option(s');
+          expect(withMulti.html()).not.toContain('placeholder=');
         });
       });
       describe('withSingleChoice', () => {
@@ -125,7 +125,7 @@ describe('SelectControl', () => {
               placeholder="add something"
             />,
           );
-          expect(singleChoice.html()).not.toContain('option(s');
+          expect(singleChoice.html()).not.toContain('placeholder=');
         });
       });
       describe('default placeholder', () => {
@@ -133,7 +133,7 @@ describe('SelectControl', () => {
           const defaultPlaceholder = mount(
             <SelectControl {...defaultProps} choices={[]} multi />,
           );
-          expect(defaultPlaceholder.html()).not.toContain('option(s');
+          expect(defaultPlaceholder.html()).not.toContain('placeholder=');
         });
       });
       describe('all choices selected', () => {
@@ -145,12 +145,12 @@ describe('SelectControl', () => {
               value={['today', '1 year ago']}
             />,
           );
-          expect(allChoicesSelected.html()).not.toContain('option(s');
+          expect(allChoicesSelected.html()).toContain('placeholder=""');
         });
       });
     });
     describe('when select is multi', () => {
-      it('does not render the placeholder when a selection has been made', () => {
+      it('renders the placeholder when a selection has been made', () => {
         wrapper = mount(
           <SelectControl
             {...defaultProps}
@@ -159,7 +159,7 @@ describe('SelectControl', () => {
             placeholder="add something"
           />,
         );
-        expect(wrapper.html()).not.toContain('add something');
+        expect(wrapper.html()).toContain('add something');
       });
       it('shows numbers of options as a placeholder by default', () => {
         wrapper = mount(<SelectControl {...defaultProps} multi />);

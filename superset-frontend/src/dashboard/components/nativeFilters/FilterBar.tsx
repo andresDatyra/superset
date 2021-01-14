@@ -67,14 +67,18 @@ const Bar = styled.div`
   /* &.animated {
     display: flex;
     transform: translateX(-100%);
-    transition: transform ${({ theme }) => theme.transitionTiming}s;
+    transition: transform ${({
+    theme,
+  }) => theme.transitionTiming}s;
     transition-delay: 0s;
   }  */
   &.open {
     display: flex;
     /* &.animated {
       transform: translateX(0);
-      transition-delay: ${({ theme }) => theme.transitionTiming * 2}s;
+      transition-delay: ${({
+      theme,
+    }) => theme.transitionTiming * 2}s;
     } */
   }
 `;
@@ -91,7 +95,9 @@ const CollapsedBar = styled.div`
   /* &.animated {
     display: block;
     transform: translateX(-100%);
-    transition: transform ${({ theme }) => theme.transitionTiming}s;
+    transition: transform ${({
+    theme,
+  }) => theme.transitionTiming}s;
     transition-delay: 0s;
   } */
   &.open {
@@ -101,7 +107,9 @@ const CollapsedBar = styled.div`
     padding: ${({ theme }) => theme.gridUnit * 2}px;
     /* &.animated {
       transform: translateX(0);
-      transition-delay: ${({ theme }) => theme.transitionTiming * 3}s;
+      transition-delay: ${({
+      theme,
+    }) => theme.transitionTiming * 3}s;
     } */
   }
   svg {
@@ -214,7 +222,7 @@ const FilterValue: React.FC<FilterProps> = ({
   } = filter;
   const cascadingFilters = useCascadingFilters(id);
   const [loading, setLoading] = useState<boolean>(true);
-  const [state, setState] = useState([]);
+  const [state, setState] = useState({ data: undefined });
   const [formData, setFormData] = useState<Partial<QueryFormData>>({});
   const [target] = targets;
   const { datasetId = 18, column } = target;
@@ -248,7 +256,7 @@ const FilterValue: React.FC<FilterProps> = ({
         force: false,
         requestParams: { dashboardId: 0 },
       }).then(response => {
-        setState(response.result);
+        setState({ data: response.result[0].data });
         setLoading(false);
       });
     }
@@ -276,7 +284,7 @@ const FilterValue: React.FC<FilterProps> = ({
           height={20}
           width={220}
           formData={getFormData()}
-          queriesData={state}
+          queriesData={[state]}
           chartType="filter_select"
           hooks={{ setExtraFormData }}
         />
@@ -313,28 +321,30 @@ interface CascadeFilterControlProps {
 export const CascadeFilterControl: React.FC<CascadeFilterControlProps> = ({
   filter,
   onExtraFormDataChange,
-}) => (
-  <>
-    <StyledFilterControlBox>
-      <StyledCaretIcon name="caret-down" />
-      <FilterControl
-        filter={filter}
-        onExtraFormDataChange={onExtraFormDataChange}
-      />
-    </StyledFilterControlBox>
+}) => {
+  return (
+    <>
+      <StyledFilterControlBox>
+        <StyledCaretIcon name="caret-down" />
+        <FilterControl
+          filter={filter}
+          onExtraFormDataChange={onExtraFormDataChange}
+        />
+      </StyledFilterControlBox>
 
-    <StyledCascadeChildrenList>
-      {filter.cascadeChildren?.map(childFilter => (
-        <li key={childFilter.id}>
-          <CascadeFilterControl
-            filter={childFilter}
-            onExtraFormDataChange={onExtraFormDataChange}
-          />
-        </li>
-      ))}
-    </StyledCascadeChildrenList>
-  </>
-);
+      <StyledCascadeChildrenList>
+        {filter.cascadeChildren?.map(childFilter => (
+          <li key={childFilter.id}>
+            <CascadeFilterControl
+              filter={childFilter}
+              onExtraFormDataChange={onExtraFormDataChange}
+            />
+          </li>
+        ))}
+      </StyledCascadeChildrenList>
+    </>
+  );
+};
 
 const FilterBar: React.FC<FiltersBarProps> = ({
   filtersOpen,

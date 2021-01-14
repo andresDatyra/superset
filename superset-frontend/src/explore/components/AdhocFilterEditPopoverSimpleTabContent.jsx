@@ -44,7 +44,6 @@ const SelectWithLabel = styled(Select)`
     display: inline-block;
     white-space: nowrap;
     color: ${({ theme }) => theme.colors.grayscale.light1};
-    width: max-content;
   }
 `;
 

@@ -415,11 +415,13 @@ const NotificationMethod: FunctionComponent<NotificationMethodProps> = ({
     setRecipientValue(recipients);
   }
 
-  const methodOptions = (options || []).map((method: NotificationMethod) => (
-    <Select.Option key={method} value={method}>
-      {t(method)}
-    </Select.Option>
-  ));
+  const methodOptions = (options || []).map((method: NotificationMethod) => {
+    return (
+      <Select.Option key={method} value={method}>
+        {t(method)}
+      </Select.Option>
+    );
+  });
 
   return (
     <StyledNotificationMethod>
@@ -475,10 +477,9 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
   isReport = false,
 }) => {
   const [disableSave, setDisableSave] = useState<boolean>(true);
-  const [
-    currentAlert,
-    setCurrentAlert,
-  ] = useState<Partial<AlertObject> | null>();
+  const [currentAlert, setCurrentAlert] = useState<Partial<
+    AlertObject
+  > | null>();
   const [isHidden, setIsHidden] = useState<boolean>(true);
   const [contentType, setContentType] = useState<string>('dashboard');
 
@@ -490,10 +491,9 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
 
   const isEditMode = alert !== null;
 
-  const [
-    notificationAddState,
-    setNotificationAddState,
-  ] = useState<NotificationAddStatus>('active');
+  const [notificationAddState, setNotificationAddState] = useState<
+    NotificationAddStatus
+  >('active');
   const [notificationSettings, setNotificationSettings] = useState<
     NotificationSetting[]
   >([]);
@@ -636,12 +636,15 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
     return SupersetClient.get({
       endpoint: `/api/v1/report/related/owners?q=${query}`,
     }).then(
-      response =>
-        response.json.result.map((item: any) => ({
+      response => {
+        return response.json.result.map((item: any) => ({
           value: item.value,
           label: item.text,
-        })),
-      badResponse => [],
+        }));
+      },
+      badResponse => {
+        return [];
+      },
     );
   };
 
@@ -669,7 +672,9 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
 
         return list;
       },
-      badResponse => [],
+      badResponse => {
+        return [];
+      },
     );
   };
 
@@ -716,7 +721,9 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
 
         return list;
       },
-      badResponse => [],
+      badResponse => {
+        return [];
+      },
     );
   };
 
@@ -759,7 +766,9 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
 
         return list;
       },
-      badResponse => [],
+      badResponse => {
+        return [];
+      },
     );
   };
 
@@ -1020,17 +1029,21 @@ const AlertReportModal: FunctionComponent<AlertReportModalProps> = ({
   }
 
   // Dropdown options
-  const conditionOptions = CONDITIONS.map(condition => (
-    <Select.Option key={condition.value} value={condition.value}>
-      {condition.label}
-    </Select.Option>
-  ));
+  const conditionOptions = CONDITIONS.map(condition => {
+    return (
+      <Select.Option key={condition.value} value={condition.value}>
+        {condition.label}
+      </Select.Option>
+    );
+  });
 
-  const retentionOptions = RETENTION_OPTIONS.map(option => (
-    <Select.Option key={option.value} value={option.value}>
-      {option.label}
-    </Select.Option>
-  ));
+  const retentionOptions = RETENTION_OPTIONS.map(option => {
+    return (
+      <Select.Option key={option.value} value={option.value}>
+        {option.label}
+      </Select.Option>
+    );
+  });
 
   return (
     <Modal

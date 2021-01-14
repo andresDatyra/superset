@@ -148,13 +148,13 @@ const legacyChartDataRequest = async (
     'GET' && isFeatureEnabled(FeatureFlag.CLIENT_CACHE)
       ? SupersetClient.get
       : SupersetClient.post;
-  return clientMethod(querySettings).then(({ json }) =>
+  return clientMethod(querySettings).then(({ json }) => {
     // Make the legacy endpoint return a payload that corresponds to the
     // V1 chart data endpoint response signature.
-    ({
+    return {
       result: [json],
-    }),
-  );
+    };
+  });
 };
 
 const v1ChartDataRequest = async (
@@ -195,7 +195,9 @@ const v1ChartDataRequest = async (
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
   };
-  return SupersetClient.post(querySettings).then(({ json }) => json);
+  return SupersetClient.post(querySettings).then(({ json }) => {
+    return json;
+  });
 };
 
 export async function getChartDataRequest({
@@ -301,7 +303,7 @@ export function runAnnotationQuery(
             dispatch(
               annotationQueryFailed(
                 annotation,
-                { error: 'Query timeout' },
+                { error: 'Query Timeout' },
                 sliceKey,
               ),
             );

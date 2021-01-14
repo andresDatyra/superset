@@ -90,11 +90,12 @@ const loadOwnerOptions = (input = '') => {
   return SupersetClient.get({
     endpoint: `/api/v1/dashboard/related/owners?q=${query}`,
   }).then(
-    response =>
-      response.json.result.map(item => ({
+    response => {
+      return response.json.result.map(item => ({
         value: item.value,
         label: item.text,
-      })),
+      }));
+    },
     badResponse => {
       handleErrorResponse(badResponse);
       return [];

@@ -38,12 +38,6 @@ export const options = [
   [86400, t('24 hours')],
 ].map(o => ({ value: o[0], label: o[1] }));
 
-const StyledModalTrigger = styled(ModalTrigger)`
-  .ant-modal-body {
-    overflow: visible;
-  }
-`;
-
 const RefreshWarningContainer = styled.div`
   margin-top: ${({ theme }) => theme.gridUnit * 6}px;
 `;
@@ -109,7 +103,7 @@ class RefreshIntervalModal extends React.PureComponent<
       !!refreshFrequency && !!refreshWarning && refreshFrequency < refreshLimit;
 
     return (
-      <StyledModalTrigger
+      <ModalTrigger
         ref={this.modalRef}
         triggerNode={this.props.triggerNode}
         modalTitle={t('Refresh Interval')}

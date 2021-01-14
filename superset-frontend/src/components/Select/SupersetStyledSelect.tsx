@@ -76,7 +76,6 @@ export type SupersetStyledSelectProps<
   // additional props for easier usage or backward compatibility
   labelKey?: string;
   valueKey?: string;
-  assistiveText?: string;
   multi?: boolean;
   clearable?: boolean;
   sortable?: boolean;
@@ -100,9 +99,9 @@ function styled<
   OptionType extends OptionTypeBase,
   SelectComponentType extends
     | WindowedSelectComponentType<OptionType>
-    | ComponentType<
-        SelectProps<OptionType>
-      > = WindowedSelectComponentType<OptionType>
+    | ComponentType<SelectProps<OptionType>> = WindowedSelectComponentType<
+    OptionType
+  >
 >(SelectComponent: SelectComponentType) {
   type SelectProps = SupersetStyledSelectProps<OptionType>;
   type Components = SelectComponents<OptionType>;
@@ -114,8 +113,8 @@ function styled<
   // default components for the given OptionType
   const supersetDefaultComponents: SelectComponentsConfig<OptionType> = DEFAULT_COMPONENTS;
 
-  const getSortableMultiValue = (MultiValue: Components['MultiValue']) =>
-    SortableElement((props: MultiValueProps<OptionType>) => {
+  const getSortableMultiValue = (MultiValue: Components['MultiValue']) => {
+    return SortableElement((props: MultiValueProps<OptionType>) => {
       const onMouseDown = (e: SyntheticEvent) => {
         e.preventDefault();
         e.stopPropagation();
@@ -123,6 +122,7 @@ function styled<
       const innerProps = { onMouseDown };
       return <MultiValue {...props} innerProps={innerProps} />;
     });
+  };
 
   /**
    * Superset styled `Select` component. Apply Superset themed stylesheets and

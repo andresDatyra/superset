@@ -37,6 +37,7 @@ export const Table = styled.table`
   background-color: ${({ theme }) => theme.colors.grayscale.light5};
   border-collapse: separate;
   border-radius: ${({ theme }) => theme.borderRadius}px;
+  overflow: hidden;
 
   thead > tr > th {
     border: 0;
@@ -51,6 +52,8 @@ export const Table = styled.table`
     background: ${({ theme }) => theme.colors.grayscale.light5};
     position: sticky;
     top: 0;
+
+    white-space: nowrap;
 
     &:first-of-type {
       padding-left: ${({ theme }) => theme.gridUnit * 4}px;
@@ -75,16 +78,9 @@ export const Table = styled.table`
       min-width: 200px;
     }
 
-    span {
-      white-space: nowrap;
-      display: flex;
-      align-items: center;
-      line-height: 2;
-    }
-
     svg {
       display: inline-block;
-      top: 2px;
+      top: 6px;
       position: relative;
     }
   }
@@ -209,17 +205,17 @@ export const Table = styled.table`
 
 Table.displayName = 'table';
 
-export default React.memo(
-  ({
-    getTableProps,
-    getTableBodyProps,
-    prepareRow,
-    headerGroups,
-    columns,
-    rows,
-    loading,
-    highlightRowId,
-  }: TableCollectionProps) => (
+export default function TableCollection({
+  getTableProps,
+  getTableBodyProps,
+  prepareRow,
+  headerGroups,
+  columns,
+  rows,
+  loading,
+  highlightRowId,
+}: TableCollectionProps) {
+  return (
     <Table
       {...getTableProps()}
       className="table table-hover"
@@ -318,5 +314,5 @@ export default React.memo(
           })}
       </tbody>
     </Table>
-  ),
-);
+  );
+}

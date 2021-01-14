@@ -90,6 +90,9 @@ const DatasourceContainer = styled.div`
     padding-left: ${({ theme }) => theme.gridUnit * 2}px;
     padding-bottom: 0px;
   }
+  .form-control.input-sm {
+    margin-bottom: ${({ theme }) => theme.gridUnit * 3}px;
+  }
   .ant-collapse-item {
     background-color: ${({ theme }) => theme.colors.grayscale.light4};
     .anticon.anticon-right.ant-collapse-arrow > svg {
@@ -127,9 +130,8 @@ const DatasourceContainer = styled.div`
     font-size: ${({ theme }) => theme.typography.sizes.s}px;
     color: ${({ theme }) => theme.colors.grayscale.light1};
   }
-  .form-control.input-md {
-    width: calc(100% - ${({ theme }) => theme.gridUnit * 4}px);
-    margin: ${({ theme }) => theme.gridUnit * 2}px auto;
+  .form-control.input-sm {
+    margin-bottom: 0;
   }
   .type-label {
     font-weight: ${({ theme }) => theme.typography.weights.light};
@@ -138,24 +140,6 @@ const DatasourceContainer = styled.div`
   }
   .Control {
     padding-bottom: 0;
-  }
-`;
-
-const LabelContainer = styled.div`
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  & > span {
-    white-space: nowrap;
-  }
-
-  .option-label {
-    display: inline;
-  }
-
-  .metric-option > .option-label {
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 `;
 
@@ -198,31 +182,18 @@ const DataSourcePanel = ({
         actions={actions}
         formData={datasourceControl.mapStateToProps}
       />
-      <input
-        type="text"
-        onChange={search}
-        className="form-control input-md"
-        placeholder={t('Search Metrics & Columns')}
-      />
       <div className="field-selections">
+        <input
+          type="text"
+          onChange={search}
+          className="form-control input-sm"
+          placeholder={t('Search Metrics & Columns')}
+        />
         <Collapse
           bordered={false}
-          defaultActiveKey={['metrics', 'column']}
+          defaultActiveKey={['column', 'metrics']}
           expandIconPosition="right"
         >
-          <Collapse.Panel
-            header={<span className="header">{t('Metrics')}</span>}
-            key="metrics"
-          >
-            <div className="field-length">
-              {t(`Showing %s of %s`, metricSlice.length, metrics.length)}
-            </div>
-            {metricSlice.map(m => (
-              <LabelContainer key={m.metric_name} className="column">
-                <MetricOption metric={m} showType />
-              </LabelContainer>
-            ))}
-          </Collapse.Panel>
           <Collapse.Panel
             header={<span className="header">{t('Columns')}</span>}
             key="column"
@@ -231,9 +202,22 @@ const DataSourcePanel = ({
               {t(`Showing %s of %s`, columnSlice.length, columns.length)}
             </div>
             {columnSlice.map(col => (
-              <LabelContainer key={col.column_name} className="column">
+              <div key={col.column_name} className="column">
                 <ColumnOption column={col} showType />
-              </LabelContainer>
+              </div>
+            ))}
+          </Collapse.Panel>
+          <Collapse.Panel
+            header={<span className="header">{t('Metrics')}</span>}
+            key="metrics"
+          >
+            <div className="field-length">
+              {t(`Showing %s of %s`, metricSlice.length, metrics.length)}
+            </div>
+            {metricSlice.map(m => (
+              <div key={m.metric_name} className="column">
+                <MetricOption metric={m} showType />
+              </div>
             ))}
           </Collapse.Panel>
         </Collapse>

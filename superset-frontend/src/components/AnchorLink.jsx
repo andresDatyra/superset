@@ -85,7 +85,7 @@ class AnchorLink extends React.PureComponent {
               filters,
               anchorLinkId,
             )}
-            emailSubject={t('Superset chart')}
+            emailSubject={t('Superset Chart')}
             emailContent={t('Check out this chart in dashboard:')}
             placement={placement}
           />

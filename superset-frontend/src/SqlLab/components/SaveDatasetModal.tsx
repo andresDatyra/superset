@@ -30,7 +30,7 @@ interface SaveDatasetModalProps {
   onOk: () => void;
   onHide: () => void;
   handleDatasetNameChange: (e: React.FormEvent<HTMLInputElement>) => void;
-  handleSaveDatasetModalSearch: (searchText: string) => Promise<void>;
+  handleSaveDatasetModalSearch: (searchText: string) => void;
   filterAutocompleteOption: (
     inputValue: string,
     option: { value: string; datasetId: number },
@@ -91,82 +91,84 @@ export const SaveDatasetModal: FunctionComponent<SaveDatasetModalProps> = ({
   filterAutocompleteOption,
   userDatasetOptions,
   onChangeAutoComplete,
-}) => (
-  <StyledModal
-    show={visible}
-    title="Save or Overwrite Dataset"
-    onHide={onHide}
-    footer={
-      <>
-        {!shouldOverwriteDataset && (
-          <Button
-            disabled={disableSaveAndExploreBtn}
-            buttonSize="medium"
-            buttonStyle="primary"
-            onClick={onOk}
-          >
-            {t('Save & Explore')}
-          </Button>
-        )}
-        {shouldOverwriteDataset && (
-          <>
-            <Button buttonSize="medium" onClick={handleOverwriteCancel}>
-              Back
-            </Button>
+}) => {
+  return (
+    <StyledModal
+      show={visible}
+      title="Save or Overwrite Dataset"
+      onHide={onHide}
+      footer={
+        <>
+          {!shouldOverwriteDataset && (
             <Button
-              className="md"
+              disabled={disableSaveAndExploreBtn}
               buttonSize="medium"
               buttonStyle="primary"
-              onClick={handleOverwriteDataset}
-              disabled={disableSaveAndExploreBtn}
+              onClick={onOk}
             >
-              {t('Overwrite & Explore')}
+              {t('Save & Explore')}
             </Button>
-          </>
-        )}
-      </>
-    }
-  >
-    <Styles>
-      {!shouldOverwriteDataset && (
-        <div className="smd-body">
-          <div className="smd-prompt">
-            Save this query as a virtual dataset to continue exploring
+          )}
+          {shouldOverwriteDataset && (
+            <>
+              <Button buttonSize="medium" onClick={handleOverwriteCancel}>
+                Back
+              </Button>
+              <Button
+                className="md"
+                buttonSize="medium"
+                buttonStyle="primary"
+                onClick={handleOverwriteDataset}
+                disabled={disableSaveAndExploreBtn}
+              >
+                {t('Overwrite & Explore')}
+              </Button>
+            </>
+          )}
+        </>
+      }
+    >
+      <Styles>
+        {!shouldOverwriteDataset && (
+          <div className="smd-body">
+            <div className="smd-prompt">
+              Save this query as virtual dataset to continue exploring.
+            </div>
+            <Radio.Group
+              onChange={handleSaveDatasetRadioBtnState}
+              value={saveDatasetRadioBtnState}
+            >
+              <Radio className="smd-radio" value={1}>
+                Save as new
+                <Input
+                  className="smd-input"
+                  defaultValue={defaultCreateDatasetValue}
+                  onChange={handleDatasetNameChange}
+                  disabled={saveDatasetRadioBtnState !== 1}
+                />
+              </Radio>
+              <Radio className="smd-radio" value={2}>
+                Overwrite existing
+                <AutoComplete
+                  className="smd-autocomplete"
+                  options={userDatasetOptions}
+                  onSelect={handleOverwriteDatasetOption}
+                  onSearch={handleSaveDatasetModalSearch}
+                  onChange={onChangeAutoComplete}
+                  placeholder="Select or type dataset name"
+                  filterOption={filterAutocompleteOption}
+                  disabled={saveDatasetRadioBtnState !== 2}
+                />
+              </Radio>
+            </Radio.Group>
           </div>
-          <Radio.Group
-            onChange={handleSaveDatasetRadioBtnState}
-            value={saveDatasetRadioBtnState}
-          >
-            <Radio className="smd-radio" value={1}>
-              Save as new
-              <Input
-                className="smd-input"
-                defaultValue={defaultCreateDatasetValue}
-                onChange={handleDatasetNameChange}
-                disabled={saveDatasetRadioBtnState !== 1}
-              />
-            </Radio>
-            <Radio className="smd-radio" value={2}>
-              Overwrite existing
-              <AutoComplete
-                className="smd-autocomplete"
-                options={userDatasetOptions}
-                onSelect={handleOverwriteDatasetOption}
-                onSearch={handleSaveDatasetModalSearch}
-                onChange={onChangeAutoComplete}
-                placeholder="Select or type dataset name"
-                filterOption={filterAutocompleteOption}
-                disabled={saveDatasetRadioBtnState !== 2}
-              />
-            </Radio>
-          </Radio.Group>
-        </div>
-      )}
-      {shouldOverwriteDataset && (
-        <div className="smd-overwrite-msg">
-          Are you sure you want to overwrite this dataset?
-        </div>
-      )}
-    </Styles>
-  </StyledModal>
-);
+        )}
+        {shouldOverwriteDataset && (
+          <div className="smd-overwrite-msg">
+            Are you sure you want to overwrite this dataset?
+          </div>
+        )}
+      </Styles>
+    </StyledModal>
+  );
+};

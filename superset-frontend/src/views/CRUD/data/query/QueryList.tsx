@@ -102,10 +102,9 @@ function QueryList({ addDangerToast, addSuccessToast }: QueryListProps) {
     false,
   );
 
-  const [
-    queryCurrentlyPreviewing,
-    setQueryCurrentlyPreviewing,
-  ] = useState<QueryObject>();
+  const [queryCurrentlyPreviewing, setQueryCurrentlyPreviewing] = useState<
+    QueryObject
+  >();
 
   const handleQueryPreview = useCallback(
     (id: number) => {
@@ -299,18 +298,20 @@ function QueryList({ addDangerToast, addSuccessToast }: QueryListProps) {
       {
         accessor: QueryObjectColumns.sql,
         Header: t('SQL'),
-        Cell: ({ row: { original, id } }: any) => (
-          <div
-            tabIndex={0}
-            role="button"
-            data-test={`open-sql-preview-${id}`}
-            onClick={() => setQueryCurrentlyPreviewing(original)}
-          >
-            <StyledSyntaxHighlighter language="sql" style={github}>
-              {shortenSQL(original.sql, SQL_PREVIEW_MAX_LINES)}
-            </StyledSyntaxHighlighter>
-          </div>
-        ),
+        Cell: ({ row: { original, id } }: any) => {
+          return (
+            <div
+              tabIndex={0}
+              role="button"
+              data-test={`open-sql-preview-${id}`}
+              onClick={() => setQueryCurrentlyPreviewing(original)}
+            >
+              <StyledSyntaxHighlighter language="sql" style={github}>
+                {shortenSQL(original.sql, SQL_PREVIEW_MAX_LINES)}
+              </StyledSyntaxHighlighter>
+            </div>
+          );
+        },
       },
       {
         Header: t('Actions'),
@@ -320,13 +321,15 @@ function QueryList({ addDangerToast, addSuccessToast }: QueryListProps) {
           row: {
             original: { id },
           },
-        }: any) => (
-          <Tooltip title={t('Open query in SQL Lab')} placement="bottom">
-            <a href={`/superset/sqllab?queryId=${id}`}>
-              <Icon name="full" />
-            </a>
-          </Tooltip>
-        ),
+        }: any) => {
+          return (
+            <Tooltip title={t('Open query in SQL Lab')} placement="bottom">
+              <a href={`/superset/sqllab?queryId=${id}`}>
+                <Icon name="full" />
+              </a>
+            </Tooltip>
+          );
+        },
       },
     ],
     [],

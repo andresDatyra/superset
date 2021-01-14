@@ -37,7 +37,6 @@ export type AdhocMetricPopoverTriggerProps = {
 export type AdhocMetricPopoverTriggerState = {
   popoverVisible: boolean;
   title: { label: string; hasCustomLabel: boolean };
-  labelModified: boolean;
 };
 
 class AdhocMetricPopoverTrigger extends React.PureComponent<
@@ -56,7 +55,6 @@ class AdhocMetricPopoverTrigger extends React.PureComponent<
         label: props.adhocMetric.label,
         hasCustomLabel: props.adhocMetric.hasCustomLabel,
       },
-      labelModified: false,
     };
   }
 
@@ -67,7 +65,6 @@ class AdhocMetricPopoverTrigger extends React.PureComponent<
         label: label || this.props.adhocMetric.label,
         hasCustomLabel: !!label,
       },
-      labelModified: true,
     });
   }
 
@@ -77,9 +74,6 @@ class AdhocMetricPopoverTrigger extends React.PureComponent<
 
   closePopover() {
     this.togglePopover(false);
-    this.setState({
-      labelModified: false,
-    });
   }
 
   togglePopover(visible: boolean) {
@@ -90,15 +84,11 @@ class AdhocMetricPopoverTrigger extends React.PureComponent<
 
   render() {
     const { adhocMetric } = this.props;
-    const { label, hasCustomLabel } = adhocMetric;
-    const title = this.state.labelModified
-      ? this.state.title
-      : { label, hasCustomLabel };
 
     const overlayContent = (
       <AdhocMetricEditPopover
         adhocMetric={adhocMetric}
-        title={title}
+        title={this.state.title}
         columns={this.props.columns}
         savedMetrics={this.props.savedMetrics}
         savedMetric={this.props.savedMetric}
@@ -111,7 +101,8 @@ class AdhocMetricPopoverTrigger extends React.PureComponent<
 
     const popoverTitle = (
       <AdhocMetricEditPopoverTitle
-        title={title}
+        title={this.state.title}
+        defaultLabel={adhocMetric.label}
         onChange={this.onLabelChange}
       />
     );

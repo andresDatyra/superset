@@ -83,7 +83,7 @@ describe('getControlsForVizType', () => {
       JSON.stringify({
         label_colors: {
           type: 'ColorMapControl',
-          label: t('Color map'),
+          label: t('Color Map'),
           default: {},
           renderTrigger: true,
           mapStateToProps: state => ({

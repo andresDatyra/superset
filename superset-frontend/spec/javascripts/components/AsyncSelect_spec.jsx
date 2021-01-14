@@ -62,8 +62,8 @@ describe('AsyncSelect', () => {
   });
 
   describe('auto select', () => {
-    it('should not call onChange if autoSelect=false', () =>
-      new Promise(done => {
+    it('should not call onChange if autoSelect=false', () => {
+      return new Promise(done => {
         expect.assertions(2);
 
         const onChangeSpy = jest.fn();
@@ -74,10 +74,11 @@ describe('AsyncSelect', () => {
           expect(onChangeSpy.mock.calls).toHaveLength(0);
           done();
         });
-      }));
+      });
+    });
 
-    it('should auto select the first option if autoSelect=true', () =>
-      new Promise(done => {
+    it('should auto select the first option if autoSelect=true', () => {
+      return new Promise(done => {
         expect.assertions(3);
 
         const onChangeSpy = jest.fn();
@@ -93,10 +94,11 @@ describe('AsyncSelect', () => {
           );
           done();
         });
-      }));
+      });
+    });
 
-    it('should not auto select when value prop is set and autoSelect=true', () =>
-      new Promise(done => {
+    it('should not auto select when value prop is set and autoSelect=true', () => {
+      return new Promise(done => {
         expect.assertions(3);
 
         const onChangeSpy = jest.fn();
@@ -115,7 +117,8 @@ describe('AsyncSelect', () => {
           expect(wrapper.find(Select)).toExist();
           done();
         });
-      }));
+      });
+    });
 
     it('should call onAsyncError if there is an error fetching options', () => {
       expect.assertions(3);

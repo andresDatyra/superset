@@ -27,6 +27,7 @@ describe('SaveDatasetModal', () => {
     onOk: () => {},
     onHide: () => {},
     handleDatasetNameChange: () => {},
+    userDatasetsOwned: [],
     handleSaveDatasetRadioBtnState: () => {},
     saveDatasetRadioBtnState: 1,
     handleOverwriteCancel: () => {},
@@ -36,22 +37,19 @@ describe('SaveDatasetModal', () => {
     shouldOverwriteDataset: false,
     userDatasetOptions: [],
     disableSaveAndExploreBtn: false,
-    handleSaveDatasetModalSearch: () => Promise,
+    handleSaveDatasetModalSearch: () => {},
     filterAutocompleteOption: () => false,
     onChangeAutoComplete: () => {},
   };
   it('renders a radio group btn', () => {
-    // @ts-ignore
     const wrapper = shallow(<SaveDatasetModal {...mockedProps} />);
     expect(wrapper.find(Radio.Group)).toExist();
   });
   it('renders a autocomplete', () => {
-    // @ts-ignore
     const wrapper = shallow(<SaveDatasetModal {...mockedProps} />);
     expect(wrapper.find(AutoComplete)).toExist();
   });
-  it('renders an input form', () => {
-    // @ts-ignore
+  it('renders an input form ', () => {
     const wrapper = shallow(<SaveDatasetModal {...mockedProps} />);
     expect(wrapper.find(Input)).toExist();
   });

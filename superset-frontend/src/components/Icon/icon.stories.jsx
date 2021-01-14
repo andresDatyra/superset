@@ -61,24 +61,26 @@ const IconBlock = styled.div`
   }
 `;
 
-export const SupersetIcon = () => (
-  <IconSet>
-    {Object.keys(iconsRegistry)
-      .sort()
-      .map(iconName => (
-        <IconBlock key={iconName}>
-          <Icon
-            name={iconName}
-            key={iconName}
-            color={select(
-              colorKnob.label,
-              colorKnob.options,
-              colorKnob.defaultValue,
-              colorKnob.groupId,
-            )}
-          />
-          <div>{iconName}</div>
-        </IconBlock>
-      ))}
-  </IconSet>
-);
+export const SupersetIcon = () => {
+  return (
+    <IconSet>
+      {Object.keys(iconsRegistry)
+        .sort()
+        .map(iconName => (
+          <IconBlock key={iconName}>
+            <Icon
+              name={iconName}
+              key={iconName}
+              color={select(
+                colorKnob.label,
+                colorKnob.options,
+                colorKnob.defaultValue,
+                colorKnob.groupId,
+              )}
+            />
+            <div>{iconName}</div>
+          </IconBlock>
+        ))}
+    </IconSet>
+  );
+};

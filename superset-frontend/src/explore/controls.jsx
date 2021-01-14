@@ -203,13 +203,13 @@ export const controls = {
 
   viz_type: {
     type: 'VizTypeControl',
-    label: t('Visualization type'),
+    label: t('Visualization Type'),
     default: 'table',
     description: t('The type of visualization to display'),
   },
 
   color_picker: {
-    label: t('Fixed color'),
+    label: t('Fixed Color'),
     description: t('Use this to define a static color for all circles'),
     type: 'ColorPickerControl',
     default: PRIMARY_COLOR,
@@ -218,14 +218,14 @@ export const controls = {
 
   metric_2: {
     ...metric,
-    label: t('Right axis metric'),
+    label: t('Right Axis Metric'),
     clearable: true,
     description: t('Choose a metric for right axis'),
   },
 
   linear_color_scheme: {
     type: 'ColorSchemeControl',
-    label: t('Linear color scheme'),
+    label: t('Linear Color Scheme'),
     choices: () =>
       sequentialSchemeRegistry.values().map(value => [value.id, value.label]),
     default: sequentialSchemeRegistry.getDefaultKey(),
@@ -238,7 +238,7 @@ export const controls = {
 
   secondary_metric: {
     ...metric,
-    label: t('Color metric'),
+    label: t('Color Metric'),
     default: null,
     validators: [],
     description: t('A metric to use for color'),
@@ -385,7 +385,7 @@ export const controls = {
 
   timeseries_limit_metric: {
     type: 'MetricsControl',
-    label: t('Sort by'),
+    label: t('Sort By'),
     default: null,
     clearable: true,
     description: t('Metric used to define the top series'),
@@ -433,7 +433,7 @@ export const controls = {
 
   size: {
     ...metric,
-    label: t('Bubble size'),
+    label: t('Bubble Size'),
     default: null,
   },
 
@@ -479,7 +479,7 @@ export const controls = {
 
   color_scheme: {
     type: 'ColorSchemeControl',
-    label: t('Color scheme'),
+    label: t('Color Scheme'),
     default: categoricalSchemeRegistry.getDefaultKey(),
     renderTrigger: true,
     choices: () => categoricalSchemeRegistry.keys().map(s => [s, s]),
@@ -489,7 +489,7 @@ export const controls = {
 
   label_colors: {
     type: 'ColorMapControl',
-    label: t('Color map'),
+    label: t('Color Map'),
     default: {},
     renderTrigger: true,
     mapStateToProps: state => ({
