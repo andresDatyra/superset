@@ -192,7 +192,7 @@ PROXY_FIX_CONFIG = {"x_for": 1, "x_proto": 1,
 # GLOBALS FOR APP Builder
 # ------------------------------
 # Uncomment to setup Your App name
-APP_NAME = "Project-hu"
+APP_NAME = "Project Hu"
 
 # Uncomment to setup an App icon
 APP_ICON = "/static/assets/images/superset-logo-horiz.png"
