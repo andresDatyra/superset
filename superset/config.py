@@ -185,13 +185,14 @@ SHOW_STACKTRACE = True
 # Use all X-Forwarded headers when ENABLE_PROXY_FIX is True.
 # When proxying to a different port, set "x_port" to 0 to avoid downstream issues.
 ENABLE_PROXY_FIX = False
-PROXY_FIX_CONFIG = {"x_for": 1, "x_proto": 1, "x_host": 1, "x_port": 1, "x_prefix": 1}
+PROXY_FIX_CONFIG = {"x_for": 1, "x_proto": 1,
+                    "x_host": 1, "x_port": 1, "x_prefix": 1}
 
 # ------------------------------
 # GLOBALS FOR APP Builder
 # ------------------------------
 # Uncomment to setup Your App name
-APP_NAME = "Superset"
+APP_NAME = "Putooooo"
 
 # Uncomment to setup an App icon
 APP_ICON = "/static/assets/images/superset-logo-horiz.png"
@@ -366,7 +367,8 @@ FEATURE_FLAGS: Dict[str, bool] = {}
 #     if hasattr(g, "user") and g.user.is_active:
 #         feature_flags_dict['some_feature'] = g.user and g.user.id == 5
 #     return feature_flags_dict
-GET_FEATURE_FLAGS_FUNC: Optional[Callable[[Dict[str, bool]], Dict[str, bool]]] = None
+GET_FEATURE_FLAGS_FUNC: Optional[Callable[[
+    Dict[str, bool]], Dict[str, bool]]] = None
 
 # EXTRA_CATEGORICAL_COLOR_SCHEMES is used for adding custom categorical color schemes
 # example code for "My custom warm to hot" color scheme
@@ -815,7 +817,10 @@ BLUEPRINTS: List[Blueprint] = []
 # Provide a callable that receives a tracking_url and returns another
 # URL. This is used to translate internal Hadoop job tracker URL
 # into a proxied one
-TRACKING_URL_TRANSFORMER = lambda x: x
+
+
+def TRACKING_URL_TRANSFORMER(x): return x
+
 
 # Interval between consecutive polls when using Hive Engine
 HIVE_POLL_INTERVAL = 5
@@ -1034,7 +1039,10 @@ SIP_15_TOAST_MESSAGE = (
 # to allow mutating the object with this callback.
 # This can be used to set any properties of the object based on naming
 # conventions and such. You can find examples in the tests.
-SQLA_TABLE_MUTATOR = lambda table: table
+
+
+def SQLA_TABLE_MUTATOR(table): return table
+
 
 # Global async query config options.
 # Requires GLOBAL_ASYNC_QUERIES feature flag to be enabled.
@@ -1073,9 +1081,11 @@ if CONFIG_PATH_ENV_VAR in os.environ:
 elif importlib.util.find_spec("superset_config") and not is_test():
     try:
         import superset_config  # pylint: disable=import-error
-        from superset_config import *  # type: ignore # pylint: disable=import-error,wildcard-import,unused-wildcard-import
+        # type: ignore # pylint: disable=import-error,wildcard-import,unused-wildcard-import
+        from superset_config import *
 
-        print(f"Loaded your LOCAL configuration at [{superset_config.__file__}]")
+        print(
+            f"Loaded your LOCAL configuration at [{superset_config.__file__}]")
     except Exception:
         logger.exception("Found but failed to import local superset_config")
         raise

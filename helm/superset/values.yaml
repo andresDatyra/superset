@@ -44,7 +44,7 @@ extraEnv: {}
 configMountPath: "/app/pythonpath"
 
 image:
-  repository: apache/superset
+  repository: raziel1308/apache-incubator-superset
   tag: latest
   pullPolicy: IfNotPresent
 
