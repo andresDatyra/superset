@@ -41,6 +41,9 @@ import TableChartPlugin from '@superset-ui/plugin-chart-table';
 import TreemapChartPlugin from '@superset-ui/legacy-plugin-chart-treemap';
 import { WordCloudChartPlugin } from '@superset-ui/plugin-chart-word-cloud';
 import WorldMapChartPlugin from '@superset-ui/legacy-plugin-chart-world-map';
+import {TimelineCurveChartPlugin} from '@superset-ui/plugin-chart-timeline-curve';
+import {NetworkChartPlugin} from '@superset-ui/plugin-chart-network'
+import {EchartNetworkChartPlugin} from '@superset-ui/plugin-chart-echart-network';
 import {
   AreaChartPlugin,
   BarChartPlugin,
@@ -78,6 +81,7 @@ export default class MainPreset extends Preset {
         new BigNumberChartPlugin().configure({ key: 'big_number' }),
         new BigNumberTotalChartPlugin().configure({ key: 'big_number_total' }),
         new EchartsBoxPlotChartPlugin().configure({ key: 'box_plot' }),
+        new EchartNetworkChartPlugin().configure({key: 'network_echart'}),
         new BubbleChartPlugin().configure({ key: 'bubble' }),
         new BulletChartPlugin().configure({ key: 'bullet' }),
         new CalendarChartPlugin().configure({ key: 'cal_heatmap' }),
@@ -95,6 +99,7 @@ export default class MainPreset extends Preset {
         new LineChartPlugin().configure({ key: 'line' }),
         new LineMultiChartPlugin().configure({ key: 'line_multi' }),
         new MapBoxChartPlugin().configure({ key: 'mapbox' }),
+        new NetworkChartPlugin().configure({key: 'network_chart'}),
         new PairedTTestChartPlugin().configure({ key: 'paired_ttest' }),
         new ParallelCoordinatesChartPlugin().configure({ key: 'para' }),
         new PartitionChartPlugin().configure({ key: 'partition' }),
@@ -104,6 +109,7 @@ export default class MainPreset extends Preset {
         new SankeyChartPlugin().configure({ key: 'sankey' }),
         new SunburstChartPlugin().configure({ key: 'sunburst' }),
         new TableChartPlugin().configure({ key: 'table' }),
+        new TimelineCurveChartPlugin().configure({key: 'timeline_chart'}),
         new TimePivotChartPlugin().configure({ key: 'time_pivot' }),
         new TimeTableChartPlugin().configure({ key: 'time_table' }),
         new TreemapChartPlugin().configure({ key: 'treemap' }),

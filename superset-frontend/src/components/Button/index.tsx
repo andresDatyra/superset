@@ -115,7 +115,7 @@ const SupersetButton = styled(BootstrapButton)`
       border-style: solid;
       background-color: ${({ theme }) => theme.colors.grayscale.light5};
       color: ${({ theme }) => theme.colors.primary.dark1};
-      border-color: ${({ theme }) => theme.colors.primary.dark1};
+      border-color: #9966cc;
       &:hover {
         background-color: ${({ theme }) => theme.colors.grayscale.light5};
         color: ${({ theme }) => theme.colors.primary.dark1};
@@ -159,7 +159,7 @@ const SupersetButton = styled(BootstrapButton)`
       }
     }
     &-primary {
-      background-color: ${({ theme }) => theme.colors.primary.dark1};
+      background-color: #9966cc;
       color: ${({ theme }) => theme.colors.grayscale.light5};
       &:hover {
         background-color: ${({ theme }) =>
@@ -324,3 +324,6 @@ export default function Button({
 
   return button;
 }
+
+
+//${({ theme }) => theme.colors.primary.dark1}
